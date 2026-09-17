@@ -64,16 +64,20 @@ WHERE
 ```
 **Task 5**
 ```bash
-SELECT
+ SELECT
   date
 FROM
   `bigquery-public-data.covid19_open_data.covid19_open_data`
 WHERE
   country_name = "Italy"
-  AND cumulative_deceased > <DEATH_COUNT>
+GROUP BY
+  date
+HAVING
+  SUM(cumulative_deceased) > <DEATH_COUNT>
 ORDER BY
   date ASC
 LIMIT 1;
+
 ```
 
 **Task 6**
@@ -156,7 +160,7 @@ FROM
   `bigquery-public-data.covid19_open_data.covid19_open_data`
 WHERE
   date = '2020-05-10'
-  AND cumulative_recovered IS NOT NULL
+  AND subregion1_name IS NULL
 GROUP BY
   country_name
 HAVING
